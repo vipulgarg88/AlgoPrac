@@ -1,0 +1,25 @@
+
+    public ListNode SwapPairs(ListNode head) {
+        ListNode dummyNode = new ListNode();
+        if(head== null || head.next==null){
+            return head;
+        }
+        dummyNode.next = SwapPair(head);
+        var tempNode1 = dummyNode.next.next;//2nd
+        var tempNode = tempNode1.next;
+        while(tempNode!= null && tempNode.next!=null){
+            tempNode1.next = SwapPair(tempNode);
+            tempNode1 = tempNode1.next.next;//2nd
+            tempNode = tempNode1.next;
+        }
+        
+        return dummyNode.next;
+    }
+    
+    public ListNode SwapPair(ListNode firstNode) {
+        var secondNode = firstNode.next;
+        var thirdNode = secondNode.next;
+        secondNode.next = firstNode;
+        firstNode.next = thirdNode;
+        return secondNode;
+    }

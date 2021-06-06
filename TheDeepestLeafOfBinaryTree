@@ -1,0 +1,23 @@
+
+int deep = 0;
+
+public TreeNode DeepNode(TreeNode root) {
+    TreeNode deepNode ;
+    List<TreeNode> nodes = new <TreeNode>();
+    List<TreeNode> childNodes = new <TreeNode>();
+    nodes.Add(root);
+    while(nodes!=null){
+        foreach(node in nodes){
+            if(node.left != null)
+                childNodes.Add(node.left);
+            if(node.right != null)
+                childNodes.Add(node.right);
+            deepNode = node;
+        }
+        nodes = childNodes;
+        childNodes = new <TreeNode>(); 
+    }
+    return deepNode;
+}
+
+

@@ -1,0 +1,25 @@
+
+    public ListNode RemoveNthFromEnd(ListNode head, int n) {        
+        ListNode dummyNode = new ListNode();//Node pointing to head
+        dummyNode.next = head;
+        ListNode current = head;
+        ListNode trackingNode = dummyNode;
+        
+        
+        while(n>1){
+            current = current.next;
+            n--;
+        }
+        //current is nth node now
+        
+        
+        while(current.next != null){
+            trackingNode = trackingNode.next;
+            current = current.next;            
+        }//current is last node now
+        
+        
+        trackingNode.next = trackingNode.next.next;//
+        
+        return dummyNode.next;
+    }
