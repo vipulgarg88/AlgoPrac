@@ -1,0 +1,50 @@
+public class Solution {
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        IList<IList<int>> res = new List<IList<int>>();
+        //return res;
+        //Dictionary<int,int> numsDict = new Dictionary<int,int>();
+        //[-1,0,1,2,-1,-4]
+        //sort first
+        List<int> targetCovered = new List<int>();
+        
+        Array.Sort(nums);
+        
+        int target = 0;
+        for(int i = 0;i<nums.Length;i++){
+            if(targetCovered.Contains(nums[i]))
+                continue;
+            List<int[]> sum = TwoSum(nums,nums[i],i);
+            targetCovered.Add(nums[i]);
+            
+            if(sum!= null){
+                foreach(var s in sum){                    
+                    res.Add(new int[]{nums[i],nums[s[0]],nums[s[1]]});
+                }
+            }
+        }
+        return res;        
+    }
+    
+    public List<int[]> TwoSum(int[] nums, int target, int start)
+    {
+        Dictionary<int, int> numsDict = new Dictionary<int, int>();
+        List<int[]> resDict = new List<int[]>();
+
+        for (int i = start+1; i < nums.Length; i++)
+        {
+            int val = -1*(nums[i]+target);
+            if (numsDict.ContainsKey(val))
+            {
+                if(nums[i] < val)
+                    resDict.Add(new int[] { i, (numsDict[val]) });
+                else
+                    resDict.Add(new int[] { (numsDict[val]), i });
+            }
+            if (!numsDict.ContainsKey(nums[i]))
+            {
+                numsDict.Add(nums[i], i);
+            }
+        }
+        return resDict;
+    }
+}
